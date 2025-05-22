@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+/**
+ * This is class that implement the Factory pattern to extract the logic
+ * to create the Strategy object that will be used by in the 'Context'
+ */
 @Service
 public class FreteFactory {
 

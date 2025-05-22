@@ -8,12 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * In the Strategy pattern context this class represents the 'Client', it's invoking the 'Context' implemented within
+ * FreteCalculator class, also this class is responsible for decide what type of concrete class will be used as Strategy
+ * using the 'freteType' data to define it by FreteFactory.
+ * */
 @Controller
 public class InitController {
 
     @Autowired
     private FreteCalculator freteCalculator;
-
 
     @GetMapping("/frete/{type}/{peso}")
     public String home(Model model,
