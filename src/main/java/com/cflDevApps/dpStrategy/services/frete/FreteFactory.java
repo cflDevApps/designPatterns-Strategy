@@ -2,7 +2,6 @@ package com.cflDevApps.dpStrategy.services.frete;
 
 import com.cflDevApps.dpStrategy.contracts.FreteStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -21,8 +20,7 @@ public class FreteFactory {
         this.calculatorsMap = calculatorsMap;
     }
 
-
-    public FreteStrategy getStrategy(String freteType){
+    public FreteStrategy createFreteStrategy(String freteType){
         FreteStrategy freteStrategy =  this.calculatorsMap.get(freteType);
         if(freteStrategy == null)
             throw new RuntimeException(String.format("Invalid Frete type: %s", freteType));

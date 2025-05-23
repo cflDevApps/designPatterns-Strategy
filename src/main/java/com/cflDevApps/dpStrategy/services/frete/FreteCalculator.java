@@ -1,7 +1,6 @@
 package com.cflDevApps.dpStrategy.services.frete;
 
 import com.cflDevApps.dpStrategy.contracts.FreteStrategy;
-import com.cflDevApps.dpStrategy.dtos.Frete;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,18 +16,26 @@ import java.math.BigDecimal;
 @Service
 public class FreteCalculator {
 
+
     private final FreteFactory freteFactory;
+
+    private FreteStrategy freteCalculatorStrategy;
 
     @Autowired
     public FreteCalculator(FreteFactory freteFactory){
         this.freteFactory = freteFactory;
     }
 
-    public Frete calcularFrete(String freteType, double pesoKg){
-        FreteStrategy freteCalculatorStrategy = this.freteFactory.getStrategy(freteType);
-        BigDecimal price = freteCalculatorStrategy.calcularPreco(pesoKg);
-        String term = freteCalculatorStrategy.calcularPrazoEntrega();
-        return new Frete(price, term);
+    public void setStrategy(String freteType){
+        this.freteCalculatorStrategy = this.freteFactory.createFreteStrategy(freteType);
+    }
+
+    public BigDecimal calculaPreco(double pesoKg){
+        return this.freteCalculatorStrategy.calcularPreco(pesoKg);
+    }
+
+    public String calculaPrazo(){
+        return this.freteCalculatorStrategy.calcularPrazoEntrega();
     }
 
 }
